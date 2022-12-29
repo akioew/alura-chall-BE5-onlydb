@@ -1,0 +1,11 @@
+[{
+"id": 500,
+  "titulo": "O que é ReactJS?",
+  "description": "Neste vídeo, Vanessa Tonini e Mario Souto explicam isto para você falando sobre como esta ferramenta surgiu, para que ela serve, quais são suas aplicações e relação com outras ferramentas e como começar a trabalhar com ela.",
+  "url": "https://www.youtube.com/watch?v=6IuQUgeDPg0"
+},{
+  "id": 51,
+  "titulo": "Quais as melhores práticas com React?",
+  "description": "Recebemos o @Dev Soutinho nesse Hipsters Ponto Tube para falar sobre as melhores práticas com React e como você pode aproveitar melhor as possibilidades dessa tecnologia no cenário atual.",
+  "url": "https://www.youtube.com/watch?v=k77WZrvuDQU"
+}]
