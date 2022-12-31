@@ -71,17 +71,12 @@ class VideoController {
   static cadastrarVideo = (req, res) => {
     let video = new videos(req.body);
 
-    video.save((err) => {
-      if (err) {
-        res
-          .status(500)
-          .send({
-            message: `Falha ao cadastrar vídeo - Erro: (${err.message})`,
-          });
-      } else {
-        res.status(201).send(video.toJSON());
-      }
-    });
+    if (!video.categoriaId) {
+      video.categoriaId = '1';
+      salvaCadastroVideo(res, video);   
+    } else {
+      salvaCadastroVideo(res, video);
+    }
   };
 
   static atualizarVideo = (req, res) => {
@@ -112,3 +107,17 @@ class VideoController {
 }
 
 export default VideoController;
+
+function salvaCadastroVideo(res, video) {
+  video.save((err) => {
+    if (err) {
+      res
+        .status(500)
+        .send({
+          message: `Falha ao cadastrar vídeo - Erro: (${err.message})`,
+        });
+    } else {
+      res.status(201).send(video.toJSON());
+    }
+  });
+};
