@@ -24,9 +24,13 @@ class CategoriaController {
 
     categoria.save((err) => {
       if (err) {
-        res
-          .status(500)
-          .send({ message: `Falha ao cadastrar categoria - Erro: (${err.message})` });
+        if (err.code === 11000){
+          res.status(500).send({message: `Falha ao cadastrar categoria. Número de ID já existe no sistema.`,})
+        } else {
+          res
+            .status(500)
+            .send({message: `Falha ao cadastrar categoria - Erro: (${err.message})`,});
+        }
       } else {
         res.status(201).send(categoria.toJSON());
       }
@@ -37,8 +41,8 @@ class CategoriaController {
     const id = req.params.id;
 
     categorias.findByIdAndUpdate(id, { $set: req.body }, (err, docs) => {
-      if (!docs){
-        res.send({message: 'ID não existe'});
+      if (!docs) {
+        res.send({ message: 'ID não existe' });
       } else if (err) {
         res.status(500).send({ message: err.message });
       } else {
@@ -52,13 +56,14 @@ class CategoriaController {
 
     categorias.findByIdAndDelete(id, function (err, docs) {
       if (err || !docs) {
-        res.status(500).send({ message: 'ID Não encontrado / Nada foi deletado' });
+        res
+          .status(500)
+          .send({ message: 'ID Não encontrado / Nada foi deletado' });
       } else {
-        res.status(200).send({ message: 'Vídeo Deletado!'});
+        res.status(200).send({ message: 'Vídeo Deletado!' });
       }
     });
   };
-
 }
 
 export default CategoriaController;
